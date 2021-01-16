@@ -1,0 +1,42 @@
+$(document).ready(function () {
+  $('#submitWeather').click(function () {
+    var city = $('#city').val();
+
+    if (city != '') {
+      $.ajax({
+        url:
+          'http://api.openweathermap.org/data/2.5/weather?q=' +
+          city +
+          '&units=imperial' +
+          '&appid=ab1075a48d2c9a149a71c3395bf8f5d3',
+        type: 'GET',
+        dataType: 'jsonp',
+        success: function (data) {
+
+            console.log(data);
+
+            var cityName = data.name;
+            var weatherStatus = "Forcast: " + data.weather[0].description;
+            var resultsTemp = "Temperature: " + data.main.temp + "°F";
+            var resultsLowTemp = "Lowest Tamerature: " + data.main.temp_min + "°F";
+            var resultsFeelsLike = "Feels like " + data.main.feels_like + "°F";
+            var resultsWindSpeed = "Wind Speed: " + data.wind.speed + " MPH";
+            var resultsHumidity = "Humidity: " + data.main.humidity + "°F";
+
+            $("#cityName").text(cityName);
+            $("#weatherStatus").text(weatherStatus);
+            $("#resultsTemp").text(resultsTemp);
+            $("#resultsLowTemp").text(resultsLowTemp);
+            $("#resultsFeelsLike").text(resultsFeelsLike);
+            $("#resultsWindSpeed").text(resultsWindSpeed);
+            $("#resultsHumidity").text(resultsHumidity);
+        },
+      });
+    } else {
+      $('#error').html('ERROR: Field cannot be empty.');
+    }
+  });
+});
+
+
+//precipitation... unable to obtain unless from XML?
