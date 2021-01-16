@@ -1,4 +1,13 @@
 $(document).ready(function () {
+
+
+    function getHeaderDate() {
+        var currentHeaderDate = moment().format('dddd, MMMM Do');
+        var currentTime = moment().format('hh:mm:ss a');
+        $("#currentTime").text(currentTime);
+        $("#currentDate").text(currentHeaderDate)
+    }
+
   $('#submitWeather').click(function () {
     var city = $('#city').val();
 
@@ -36,6 +45,7 @@ $(document).ready(function () {
       $('#error').html('ERROR: Field cannot be empty.');
     }
   });
+  getHeaderDate();
 });
 
 
