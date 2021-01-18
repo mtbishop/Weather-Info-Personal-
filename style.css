@@ -1,0 +1,30 @@
+#error {
+  color: red;
+}
+.col {
+  text-align: center;
+}
+.hide {
+  display: none;
+}
+.container {
+  background-color: rgba(255, 225, 0, 0.734);
+}
+html {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+#resultsTemp {
+  font-size: 70px;
+  padding: 1px 14px 5px 14px;
+}
+#resultsLowHighTemp {
+  font-size: 35px;
+}
+
+#resultsFeelsLike {
+  padding-bottom: 25px;
+  font-size: 25px;
+}
+#weatherStatus {
+  padding-top: 10px;
+}

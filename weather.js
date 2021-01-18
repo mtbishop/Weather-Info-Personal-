@@ -1,12 +1,10 @@
 $(document).ready(function () {
-
-
-    function getHeaderDate() {
-        var currentHeaderDate = moment().format('dddd, MMMM Do');
-        var currentTime = moment().format('hh:mm:ss a');
-        $("#currentTime").text(currentTime);
-        $("#currentDate").text(currentHeaderDate)
-    }
+  function getHeaderDate() {
+    var currentHeaderDate = moment().format('dddd, MMMM Do');
+    var currentTime = moment().format('hh:mm:ss a');
+    $('#currentTime').text(currentTime);
+    $('#currentDate').text(currentHeaderDate);
+  }
 
   $('#submitWeather').click(function () {
     var city = $('#city').val();
@@ -21,24 +19,25 @@ $(document).ready(function () {
         type: 'GET',
         dataType: 'jsonp',
         success: function (data) {
+          console.log(data);
 
-            console.log(data);
+          var cityName = data.name;
+          var weatherStatus = 'Forcast: ' + data.weather[0].description;
+          var resultsTemp = data.main.temp + '°F';
+          var resultsLowHighTemp =
+            "L " +data.main.temp_min + '°F' + ' | ' + "H " + data.main.temp_max + '°F';
+          var resultsFeelsLike = 'Feels like ' + data.main.feels_like + '°F';
+          var resultsWindSpeed = 'Wind Speed: ' + data.wind.speed + ' MPH';
+          var resultsHumidity = 'Humidity: ' + data.main.humidity + '°F';
 
-            var cityName = data.name;
-            var weatherStatus = "Forcast: " + data.weather[0].description;
-            var resultsTemp = "Temperature: " + data.main.temp + "°F";
-            var resultsLowTemp = "Lowest Tamerature: " + data.main.temp_min + "°F";
-            var resultsFeelsLike = "Feels like " + data.main.feels_like + "°F";
-            var resultsWindSpeed = "Wind Speed: " + data.wind.speed + " MPH";
-            var resultsHumidity = "Humidity: " + data.main.humidity + "°F";
-
-            $("#cityName").text(cityName);
-            $("#weatherStatus").text(weatherStatus);
-            $("#resultsTemp").text(resultsTemp);
-            $("#resultsLowTemp").text(resultsLowTemp);
-            $("#resultsFeelsLike").text(resultsFeelsLike);
-            $("#resultsWindSpeed").text(resultsWindSpeed);
-            $("#resultsHumidity").text(resultsHumidity);
+          $('#cityName').text(cityName);
+          $('#weatherStatus').text(weatherStatus);
+          $('#resultsTemp').text(resultsTemp);
+          $('#resultsLowHighTemp').text(resultsLowHighTemp);
+          $('#resultsFeelsLike').text(resultsFeelsLike);
+          $('#resultsWindSpeed').text(resultsWindSpeed);
+          $('#resultsHumidity').text(resultsHumidity);
+          $('#error').addClass('hide');
         },
       });
     } else {
@@ -47,6 +46,5 @@ $(document).ready(function () {
   });
   getHeaderDate();
 });
-
 
 //precipitation... unable to obtain unless from XML?
